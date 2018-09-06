@@ -4,6 +4,10 @@ var tabla;
 function init() {
     mostrarForm(false);
     listar();
+
+    $("#formulario").on("submit", function (e) {
+        guardaryeditar(e);
+    });
 }
 function limpiar() {
     $("#id_categoria").val("");
@@ -56,7 +60,32 @@ function listar() {
         "order": [[0, "desc"]]//Ordenando por columna 0, de forma descendente
     }).DataTable();//Importante, que inicie con mayúscula este DataTable(); si no no actualizará automaticamente.
 }
+/*e.preventDefault(); No se activará la acción predeterminada del evento
+Es decir aquí se tendría que ejecutar el evento del botón submit, pero en ese 
+caso no lo hará sino serguirá el flujo de código que aquí sigue uno a continuación 
+de otro*/
+function guardaryeditar(e) {
+    e.preventDefault();
+    $("#btn_guardar").prop("disabled", true);
+    //Todos los datos del #formulario se le envían a la var formData
+    var formData = new FormData($("#formulario")[0]);
+    //El POST: es porque en el archivo ajax/categoria.php se esperan recibir los datos a través del método POST
+    //El parámetro (datos) = recibe los echo's que se imprime en ajax/cateogria.php
+    $.ajax({
+        url: "../ajax/categoria.php?op=guardaryeditar",
+        type: "POST",
+        data: formData,
+        contentType: false,
+        processData: false,
 
+        success: function (datos) {
+            bootbox.alert(datos);
+            mostrarForm(false);
+            tabla.ajax.reload();
+        }
+    });
+    limpiar();
+}
 
 //Función que se eejecuta al inicio
 init();

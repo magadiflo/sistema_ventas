@@ -6,7 +6,6 @@
     <div class="content-wrapper">
 
 
-
       <!-- Main content -->
       <section class="content">
         <div class="row">
@@ -36,14 +35,31 @@
                 </table>
               </div>
               <div class="panel-body" id="formulario_registros">
-                Aquí va el formulario
+                <form action="" name="formulario" id="formulario" method="post">
+                  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label for="nombre">Nombre:</label>
+                    <input type="hidden" name="id_categoria" id="id_categoria">
+                    <input type="text" name="nombre" id="nombre" class="form-control" maxlength="50" placeholder="Ingrese nombre" required>
+                  </div>
+                  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" name="descripcion" id="descripcion" class="form-control" maxlength="256" placeholder="Ingrese descripción">
+                  </div>
+                  <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <button class="btn btn-primary" type="submit" id="btn_guardar">
+                      <span class="fa fa-save"></span> Guardar
+                    </button>
+                    <button class="btn btn-danger" type="button" onclick="cancelarForm()">
+                      <span class="fa fa-arrow-circle-left"></span> Cancelar
+                    </button>
+                  </div>
+                </form>
               </div>
               <!--Fin centro -->
             </div><!-- /.box -->
           </div><!-- /.col -->
         </div><!-- /.row -->
       </section><!-- /.content -->
-
 
 
     </div><!-- /.content-wrapper -->
