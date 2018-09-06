@@ -86,6 +86,30 @@ function guardaryeditar(e) {
     });
     limpiar();
 }
+/*
+>>>{id_categoria: idCategoria}, el primer id_categoria dentro de las
+ llaves será la variable que se enviará por medio del método POST 
+ al archivo ajax/categoria.php donde ese archivo espera 
+ un $_POST["id_categoria"], ambos nombres deben ser idénticos.
+ y el segundo idCategoría es el valor que se está ingresando por
+ parámetro dentro de la función mostrar(idCategoría)
+>>>function(data, status), la función va a obtener un valor que 
+será almacenado en data, el cual será obtenido de toda 
+la url: "..ajax/categoria.php?op=mostrar"
+-------------------------------------------------------------
+$("#id_categoria").val(data.id); de data.id, el id, es el nombre tal cual
+está en la base de datos registrada ese nombre de columna
+*/
+//Mostrar Datos para editar
+function mostrar(idCategoria) {
+    $.post("../ajax/categoria.php?op=mostrar", { id_categoria: idCategoria }, function (data, status) {
+        data = JSON.parse(data);
+        mostrarForm(true);
+        $("#nombre").val(data.nombre);
+        $("#descripcion").val(data.descripcion);
+        $("#id_categoria").val(data.id);
+    });
+}
 
 //Función que se eejecuta al inicio
 init();

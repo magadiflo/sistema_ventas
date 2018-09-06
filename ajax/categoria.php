@@ -2,7 +2,7 @@
     require_once '../modelos/Categoria.php';
     
     $categoria = new Categoria();
-
+     
     $idCategoria = isset($_POST["id_categoria"]) ? limpiarCadena($_POST["id_categoria"]) : ""; 
     $nombre = isset($_POST["nombre"]) ? limpiarCadena($_POST["nombre"]) : ""; 
     $descripcion = isset($_POST["descripcion"]) ? limpiarCadena($_POST["descripcion"]) : ""; 
@@ -36,7 +36,7 @@
             $data = Array();
             while($reg = $res->fetch_object()){
                 $data[] = array(
-                                "0"=>$reg->id, 
+                                "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->id.')"><span class="fa fa-pencil"></span></button>', 
                                 "1"=>$reg->nombre, 
                                 "2"=>$reg->descripcion, 
                                 "3"=>$reg->condicion

@@ -29,7 +29,7 @@
             return ejecutarConsulta($sql);
         }
         public function mostrar($idCategoria){
-            $sql = "SELECT * FROM categoria WHERE id = '$idCategoria'";
+            $sql = "SELECT * FROM categoria WHERE id = $idCategoria";
             return ejecutarConsultaSimpleFila($sql);
         }
         public function listar(){
