@@ -36,10 +36,15 @@
             $data = Array();
             while($reg = $res->fetch_object()){
                 $data[] = array(
-                                "0"=>'<button class="btn btn-warning" onclick="mostrar('.$reg->id.')"><span class="fa fa-pencil"></span></button>', 
+                                "0"=>($reg->condicion) ? 
+                                        '<button class="btn btn-warning" onclick="mostrar('.$reg->id.')"><span class="fa fa-pencil"></span></button>'.
+                                        ' <button class="btn btn-danger" onclick="desactivar('.$reg->id.')"><span class="fa fa-close"></span></button>' : 
+                                        '<button class="btn btn-warning" onclick="mostrar('.$reg->id.')"><span class="fa fa-pencil"></span></button>'.
+                                        ' <button class="btn btn-primary" onclick="activar('.$reg->id.')"><span class="fa fa-check"></span></button>', 
                                 "1"=>$reg->nombre, 
                                 "2"=>$reg->descripcion, 
-                                "3"=>$reg->condicion
+                                "3"=>($reg->condicion) ? '<span class="label bg-green"> Activado </span>' : 
+                                                         '<span class="label bg-red"> Desactivado </span>'
                             );
             }
             $results = Array(

@@ -91,8 +91,9 @@ function guardaryeditar(e) {
  llaves será la variable que se enviará por medio del método POST 
  al archivo ajax/categoria.php donde ese archivo espera 
  un $_POST["id_categoria"], ambos nombres deben ser idénticos.
- y el segundo idCategoría es el valor que se está ingresando por
- parámetro dentro de la función mostrar(idCategoría)
+ El segundo idCategoría es el valor que se está ingresando por
+ parámetro dentro de la función mostrar(idCategoría).
+ Se pueden enviar más variables, pero separando por comas.
 >>>function(data, status), la función va a obtener un valor que 
 será almacenado en data, el cual será obtenido de toda 
 la url: "..ajax/categoria.php?op=mostrar"
@@ -108,6 +109,28 @@ function mostrar(idCategoria) {
         $("#nombre").val(data.nombre);
         $("#descripcion").val(data.descripcion);
         $("#id_categoria").val(data.id);
+    });
+}
+
+function desactivar(idCategoria) {
+    bootbox.confirm("¿Está seguro que desea desactivar la categoría?", function (result) {
+        if (result) {//El usuario hizo click en sí, entonces result = true
+            $.post("../ajax/categoria.php?op=desactivar", { id_categoria: idCategoria }, function (e) {
+                bootbox.alert(e);
+                tabla.ajax.reload();
+            });
+        }
+    });
+}
+
+function activar(idCategoria) {
+    bootbox.confirm("¿Está seguro que desea activar la categoría?", function (result) {
+        if (result) {//El usuario hizo click en sí, entonces result = true
+            $.post("../ajax/categoria.php?op=activar", { id_categoria: idCategoria }, function (e) {
+                bootbox.alert(e);
+                tabla.ajax.reload();
+            });
+        }
     });
 }
 
